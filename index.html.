@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🎱 泰国斯诺克锦标赛</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "Microsoft YaHei", Arial, sans-serif;
+    background: #07140e;
+    color: #ffffff;
+}
+
+header {
+    background: linear-gradient(135deg, #063d25, #0b6b3c);
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 2px solid #20c77a;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 8px 0 0;
+    color: #c8f5dc;
+    font-size: 14px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    background: #06110c;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav button {
+    border: 1px solid #1d754c;
+    background: #0b2117;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+nav button.active,
+nav button:hover {
+    background: #15945a;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 25px 15px 50px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.card {
+    background: #0d2117;
+    border: 1px solid #194d34;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: #0b2117;
+    border: 1px solid #194d34;
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 28px;
+    color: #35d889;
+}
+
+.stat span {
+    color: #a7cbb8;
+    font-size: 13px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 13px 10px;
+    border-bottom: 1px solid #214634;
+    text-align: left;
+}
+
+th {
+    color: #76e7aa;
+}
+
+.rank {
+    font-weight: bold;
+    width: 50px;
+}
+
+.points {
+    color: #42dc8a;
+    font-weight: bold;
+}
+
+.match {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.player-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #42dc8a;
+    white-space: nowrap;
+}
+
+.small {
+    color: #9db7a8;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.players {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.player {
+    background: #0b2117;
+    border: 1px solid #194d34;
+    border-radius: 14px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #173c29;
+    border: 2px solid #278957;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #9dcab0;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #214634;
+    padding: 14px 0;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    color: #9db7a8;
+}
+
+.value {
+    font-weight: bold;
+    text-align: right;
+}
+
+.notice {
+    background: #123723;
+    border-left: 4px solid #31d27f;
+    padding: 14px;
+    border-radius: 8px;
+    color: #d9f7e5;
+}
+
+footer {
+    text-align: center;
+    color: #6f8d7d;
+    padding: 25px;
+    font-size: 12px;
+}
+
+@media (max-width: 650px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .players {
+        grid-template-columns: 1fr;
+    }
+
+    .match {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .score {
+        align-self: center;
+    }
+
+    th, td {
+        padding: 10px 6px;
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎱 泰国斯诺克锦标赛</h1>
+    <p>2026 Thailand Snooker Championship</p>
+</header>
+
+<nav>
+    <button class="active" onclick="showPage('ranking', this)">🏆 排名</button>
+    <button onclick="showPage('matches', this)">🎱 比赛</button>
+    <button onclick="showPage('players', this)">👤 选手</button>
+    <button onclick="showPage('schedule', this)">📅 赛程</button>
+    <button onclick="showPage('info', this)">📋 赛事信息</button>
+</nav>
+
+<div class="container">
+
+    <!-- 排名 -->
+    <section id="ranking" class="page active">
+
+        <div class="stats">
+            <div class="stat">
+                <strong>10</strong>
+                <span>参赛选手</span>
+            </div>
+
+            <div class="stat">
+                <strong>1</strong>
+                <span>已完成比赛</span>
+            </div>
+
+            <div class="stat">
+                <strong>ding</strong>
+                <span>当前第一</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🏆 选手排名</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>选手</th>
+                        <th>积分</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td class="rank">1</td>
+                        <td>ding</td>
+                        <td class="points">30</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">2</td>
+                        <td>ilya</td>
+                        <td class="points">27</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">3</td>
+                        <td>dehong</td>
+                        <td class="points">24</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">4</td>
+                        <td>yunuo</td>
+                        <td class="points">21</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">5</td>
+                        <td>Jk</td>
+                        <td class="points">18</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">6</td>
+                        <td>alisa</td>
+                        <td class="points">15</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">7</td>
+                        <td>haoxuan</td>
+                        <td class="points">12</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">8</td>
+                        <td>Dank</td>
+                        <td class="points">9</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">9</td>
+                        <td>wuyi</td>
+                        <td class="points">6</td>
+                    </tr>
+
+                    <tr>
+                        <td class="rank">10</td>
+                        <td>oli</td>
+                        <td class="points">3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- 比赛 -->
+    <section id="matches" class="page">
+
+        <div class="card">
+            <h2>🎱 比赛结果</h2>
+
+            <div class="match">
+
+                <div>
+                    <div class="player-name">ding</div>
+                    <div class="small">9月16日</div>
+                </div>
+
+                <div class="score">
+                    98 : 30
+                </div>
+
+                <div>
+                    <div class="player-name">dehong</div>
+                    <div class="small">大比分 4 : 0</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="notice">
+            当前已完成比赛：1场
+        </div>
+
+    </section>
+
+    <!-- 选手 -->
+    <section id="players" class="page">
+
+        <div class="card">
+            <h2>👤 参赛选手</h2>
+
+            <div class="players">
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>ding</strong>
+                        <div class="small">积分：30</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>ilya</strong>
+                        <div class="small">积分：27</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>dehong</strong>
+                        <div class="small">积分：24</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>yunuo</strong>
+                        <div class="small">积分：21</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>Jk</strong>
+                        <div class="small">积分：18</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>alisa</strong>
+                        <div class="small">积分：15</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>haoxuan</strong>
+                        <div class="small">积分：12</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>Dank</strong>
+                        <div class="small">积分：9</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>wuyi</strong>
+                        <div class="small">积分：6</div>
+                    </div>
+                </div>
+
+                <div class="player">
+                    <div class="photo">照片<br>稍后完善</div>
+                    <div>
+                        <strong>oli</strong>
+                        <div class="small">积分：3</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 赛程 -->
+    <section id="schedule" class="page">
+
+        <div class="card">
+            <h2>📅 赛事赛程</h2>
+
+            <div class="notice">
+                暂无赛程
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 赛事信息 -->
+    <section id="info" class="page">
+
+        <div class="card">
+            <h2>📋 赛事信息</h2>
+
+            <div class="info-row">
+                <span class="label">赛事名称</span>
+                <span class="value">泰国芭提雅斯诺克锦标赛</span>
+            </div>
+
+            <div class="info-row">
+                <span class="label">英文名称</span>
+                <span class="value">Thailand Snooker Championship</span>
+            </div>
+
+            <div class="info-row">
+                <span class="label">比赛地点</span>
+                <span class="value">泰国芭提雅</span>
+            </div>
+
+            <div class="info-row">
+                <span class="label">比赛时间</span>
+                <span class="value">9月10日 - 9月29日</span>
+            </div>
+
+            <div class="info-row">
+                <span class="label">奖金</span>
+                <span class="value">50 泰铢</span>
+            </div>
+
+            <div class="info-row">
+                <span class="label">参赛人数</span>
+                <span class="value">10 人</span>
+            </div>
+
+        </div>
+
+        <div class="notice">
+            🎱 2026 Thailand Snooker Championship
+        </div>
+
+    </section>
+
+</div>
+
+<footer>
+    © 2026 Thailand Snooker Championship
+</footer>
+
+<script>
+
+function showPage(pageId, button) {
+
+    // 隐藏所有页面
+    document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    // 显示选择的页面
+    document.getElementById(pageId).classList.add("active");
+
+    // 清除按钮状态
+    document.querySelectorAll("nav button").forEach(function(btn) {
+        btn.classList.remove("active");
+    });
+
+    // 设置当前按钮
+    button.classList.add("active");
+
+    // 回到页面顶部
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
