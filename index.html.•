@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>泰国斯诺克锦标赛</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #07130d;
+    color: white;
+    font-family: Arial, "Microsoft YaHei", sans-serif;
+}
+
+header {
+    background: #0b5c35;
+    text-align: center;
+    padding: 28px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 8px 0 0;
+    color: #c8ead7;
+}
+
+nav {
+    background: #041009;
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+}
+
+nav button {
+    background: #12301f;
+    color: white;
+    border: 1px solid #28734b;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+nav button.active {
+    background: #159452;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px 15px 50px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.box {
+    background: #0d2116;
+    border: 1px solid #1d4d33;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #254634;
+    text-align: left;
+}
+
+th {
+    color: #63dc99;
+}
+
+.points {
+    color: #63dc99;
+    font-weight: bold;
+}
+
+.match {
+    text-align: center;
+    padding: 25px 5px;
+}
+
+.players {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.player {
+    background: #10281a;
+    border: 1px solid #24583b;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.photo {
+    width: 65px;
+    height: 65px;
+    background: #1a3d29;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    color: #9ab8a5;
+    flex-shrink: 0;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid #254634;
+}
+
+.green {
+    color: #63dc99;
+}
+
+.big-score {
+    font-size: 32px;
+    font-weight: bold;
+    color: #63dc99;
+}
+
+.notice {
+    padding: 15px;
+    background: #123b25;
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    color: #71877a;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 23px;
+    }
+
+    .players {
+        grid-template-columns: 1fr;
+    }
+
+    th,
+    td {
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎱 泰国斯诺克锦标赛</h1>
+    <p>2026 Thailand Snooker Championship</p>
+</header>
+
+<nav>
+    <button class="active" onclick="page('ranking', this)">🏆 排名</button>
+    <button onclick="page('matches', this)">🎱 比赛</button>
+    <button onclick="page('players', this)">👤 选手</button>
+    <button onclick="page('schedule', this)">📅 赛程</button>
+    <button onclick="page('info', this)">📋 赛事信息</button>
+</nav>
+
+<main>
+
+<!-- 排名 -->
+<div id="ranking" class="page active">
+
+    <div class="box">
+        <h2>🏆 当前排名</h2>
+
+        <table>
+            <tr>
+                <th>排名</th>
+                <th>选手</th>
+                <th>积分</th>
+            </tr>
+
+            <tr><td>1</td><td>ding</td><td class="points">30</td></tr>
+            <tr><td>2</td><td>ilya</td><td class="points">27</td></tr>
+            <tr><td>3</td><td>dehong</td><td class="points">24</td></tr>
+            <tr><td>4</td><td>yunuo</td><td class="points">21</td></tr>
+            <tr><td>5</td><td>Jk</td><td class="points">18</td></tr>
+            <tr><td>6</td><td>alisa</td><td class="points">15</td></tr>
+            <tr><td>7</td><td>haoxuan</td><td class="points">12</td></tr>
+            <tr><td>8</td><td>Dank</td><td class="points">9</td></tr>
+            <tr><td>9</td><td>wuyi</td><td class="points">6</td></tr>
+            <tr><td>10</td><td>oli</td><td class="points">3</td></tr>
+
+        </table>
+    </div>
+
+</div>
+
+
+<!-- 比赛 -->
+<div id="matches" class="page">
+
+    <div class="box match">
+
+        <h2>🎱 比赛结果</h2>
+
+        <p>9月16日</p>
+
+        <h3>ding　VS　dehong</h3>
+
+        <div class="big-score">
+            98 : 30
+        </div>
+
+        <p>大比分：4 : 0</p>
+
+    </div>
+
+</div>
+
+
+<!-- 选手 -->
+<div id="players" class="page">
+
+    <div class="box">
+
+        <h2>👤 参赛选手</h2>
+
+        <div class="players">
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>ding</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>ilya</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>dehong</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>yunuo</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>Jk</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>alisa</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>haoxuan</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>Dank</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>wuyi</b>
+            </div>
+
+            <div class="player">
+                <div class="photo">照片<br>稍后完善</div>
+                <b>oli</b>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 赛程 -->
+<div id="schedule" class="page">
+
+    <div class="box">
+
+        <h2>📅 赛事赛程</h2>
+
+        <div class="notice">
+            暂无赛程
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 赛事信息 -->
+<div id="info" class="page">
+
+    <div class="box">
+
+        <h2>📋 赛事信息</h2>
+
+        <div class="info">
+            <span>赛事名称</span>
+            <b>泰国芭提雅斯诺克锦标赛</b>
+        </div>
+
+        <div class="info">
+            <span>英文名称</span>
+            <b>Thailand Snooker Championship</b>
+        </div>
+
+        <div class="info">
+            <span>比赛地点</span>
+            <b>泰国芭提雅</b>
+        </div>
+
+        <div class="info">
+            <span>比赛时间</span>
+            <b>9月10日 - 9月29日</b>
+        </div>
+
+        <div class="info">
+            <span>奖金</span>
+            <b>50 泰铢</b>
+        </div>
+
+        <div class="info">
+            <span>参赛人数</span>
+            <b>10 人</b>
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+    2026 Thailand Snooker Championship
+</footer>
+
+
+<script>
+
+function page(id, button) {
+
+    var pages = document.querySelectorAll(".page");
+
+    for (var i = 0; i < pages.length; i++) {
+        pages[i].classList.remove("active");
+    }
+
+    document.getElementById(id).classList.add("active");
+
+    var buttons = document.querySelectorAll("nav button");
+
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("active");
+    }
+
+    button.classList.add("active");
+
+    window.scrollTo(0, 0);
+}
+
+</script>
+
+</body>
+</html>
