@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WWII Frontlines | 二战前线</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, "Microsoft YaHei", sans-serif;
+    background: #0b0b0b;
+    color: #eee;
+}
+
+/* 导航栏 */
+nav {
+    height: 70px;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #d6b36a;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 25px;
+}
+
+nav a:hover {
+    color: #d6b36a;
+}
+
+/* 首页 */
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.95),
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.25)
+        ),
+        url("https://images.unsplash.com/photo-1580136579312-94651dfd596d?auto=format&fit=crop&w=2000&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.tag {
+    color: #d6b36a;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    color: #ccc;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 30px;
+    background: #d6b36a;
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 通用区域 */
+section {
+    padding: 80px 8%;
+}
+
+.section-title {
+    font-size: 34px;
+    margin-bottom: 40px;
+}
+
+.section-title span {
+    color: #d6b36a;
+}
+
+/* 简介 */
+.about {
+    background: #111;
+}
+
+.about-content {
+    max-width: 900px;
+    color: #bbb;
+    line-height: 2;
+    font-size: 17px;
+}
+
+/* 集数 */
+.episodes {
+    background: #0b0b0b;
+}
+
+.episode-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.episode {
+    background: #151515;
+    border: 1px solid #292929;
+    padding: 25px;
+    min-height: 180px;
+    transition: 0.25s;
+}
+
+.episode:hover {
+    transform: translateY(-6px);
+    border-color: #d6b36a;
+}
+
+.episode-number {
+    color: #d6b36a;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.episode h3 {
+    margin-bottom: 12px;
+}
+
+.episode p {
+    color: #999;
+    line-height: 1.6;
+}
+
+/* 战役 */
+.battles {
+    background: #151515;
+}
+
+.battle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.battle {
+    padding: 30px;
+    background: #0d0d0d;
+    border-left: 3px solid #d6b36a;
+}
+
+.battle h3 {
+    margin-bottom: 12px;
+}
+
+.battle p {
+    color: #aaa;
+    line-height: 1.7;
+}
+
+/* 页脚 */
+footer {
+    padding: 35px;
+    text-align: center;
+    background: #080808;
+    color: #666;
+    border-top: 1px solid #222;
+}
+
+/* 手机 */
+@media (max-width: 900px) {
+
+    .episode-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .battle-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    nav {
+        padding: 0 20px;
+    }
+
+    nav a {
+        display: none;
+    }
+
+    section {
+        padding: 60px 20px;
+    }
+
+    .hero {
+        padding: 60px 20px;
+        min-height: 600px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .episode-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">WWII FRONTLINES</div>
+
+    <div>
+        <a href="#about">简介</a>
+        <a href="#episodes">剧集</a>
+        <a href="#battles">战役</a>
+    </div>
+</nav>
+
+
+<!-- 首页 -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="tag">WORLD WAR II DOCUMENTARY</div>
+
+        <h1>WWII<br>FRONTLINES</h1>
+
+        <p>
+            走进第二次世界大战的前线，
+            通过历史影像、地图与资料，
+            了解改变20世纪历史进程的重要战役。
+        </p>
+
+        <a class="btn" href="#episodes">
+            查看剧集
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- 简介 -->
+
+<section class="about" id="about">
+
+    <h2 class="section-title">
+        关于 <span>纪录片</span>
+    </h2>
+
+    <div class="about-content">
+
+        <p>
+            《WWII Frontlines》是一部以第二次世界大战为主题的历史纪录片系列。
+            网站将纪录片中的主要战役、历史背景以及剧集信息进行整理，
+            方便观众快速了解这段复杂而重要的历史。
+        </p>
+
+        <br>
+
+        <p>
+            本网站仅用于历史资料整理与纪录片信息展示。
+            所有历史事件均应结合可靠的历史资料进行理解。
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- 剧集 -->
+
+<section class="episodes" id="episodes">
+
+    <h2 class="section-title">
+        <span>剧集</span> Episodes
+    </h2>
+
+    <div class="episode-grid">
+
+        <div class="episode">
+            <div class="episode-number">EPISODE 01</div>
+            <h3>中途岛</h3>
+            <p>
+                太平洋战争的重要转折点之一。
+            </p>
+        </div>
+
+        <div class="episode">
+            <div class="episode-number">EPISODE 02</div>
+            <h3>蒙特卡西诺</h3>
+            <p>
+                意大利战场上的激烈战斗。
+            </p>
+        </div>
+
+        <div class="episode">
+            <div class="episode-number">EPISODE 03</div>
+            <h3>安齐奥</h3>
+            <p>
+                盟军在意大利战场的重要登陆行动。
+            </p>
+        </div>
+
+        <div class="episode">
+            <div class="episode-number">EPISODE 04</div>
+            <h3>诺曼底</h3>
+            <p>
+                1944年盟军在欧洲西线的重要登陆行动。
+            </p>
+        </div>
+
+        <div class="episode">
+            <div class="episode-number">EPISODE 05</div>
+            <h3>巴斯托涅</h3>
+            <p>
+                阿登攻势期间的重要战场。
+            </p>
+        </div>
+
+        <div class="episode">
+            <div class="episode-number">EPISODE 06</div>
+            <h3>硫磺岛</h3>
+            <p>
+                太平洋战争后期的重要战役。
+            </p>
+        </div>
+
+        <div class="episode">
+            <div class="episode-number">EPISODE 07</div>
+            <h3>柏林</h3>
+            <p>
+                欧洲战场最后阶段的重要战役。
+            </p>
+        </div>
+
+        <div class="episode">
+            <div class="episode-number">EPISODE 08</div>
+            <h3>战争终结</h3>
+            <p>
+                欧洲战争结束以及二战历史的后续影响。
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- 战役 -->
+
+<section class="battles" id="battles">
+
+    <h2 class="section-title">
+        主要 <span>战役</span>
+    </h2>
+
+    <div class="battle-grid">
+
+        <div class="battle">
+            <h3>诺曼底登陆</h3>
+            <p>
+                1944年6月6日，盟军在法国诺曼底展开大规模登陆行动，
+                开辟欧洲西线的重要战场。
+            </p>
+        </div>
+
+        <div class="battle">
+            <h3>中途岛海战</h3>
+            <p>
+                1942年发生于太平洋战区，
+                是太平洋战争中的关键海战之一。
+            </p>
+        </div>
+
+        <div class="battle">
+            <h3>柏林战役</h3>
+            <p>
+                1945年欧洲战场末期的重大军事行动，
+                最终导致纳粹德国投降。
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+    WWII Frontlines · Historical Documentary Archive
+</footer>
+
+</body>
+</html>
